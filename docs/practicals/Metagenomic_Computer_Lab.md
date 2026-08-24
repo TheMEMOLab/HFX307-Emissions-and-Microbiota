@@ -15,8 +15,10 @@ annotate our genome. Let's login to [Galaxy](https://usegalaxy.no/) using our Fe
 
 3. Upload the fasta file using the ```upload``` buttom as it is shown here ![upload](../images/Upload.png)
 
-4. Once uploaded you shoudl see it 
+4. Once uploaded you shoudl see it in your history: ![history](../images/uploadfile.png)
 
 
-Then look for Prokka in the Tools search ![Prokka in Galaxy](../images/prokka.png)
+5. To launch Prokka we can look for it in the Tools search ![Prokka in Galaxy](../images/prokka.png). 
+
+6. Select the ```Control_HighE.metabat.733.fa``` file adn 
 
