@@ -62,6 +62,8 @@ Use your NMBU account to login into [Microsoft-Copilot](https://copilot.com/).
 
 2. Once your file is up, lets use this prompt:
 
+### 🤖 Copilot prompt
+
 ```copilot
 Hi, use the annotation table attached from prokka. Let me know how many genes are from metabolism, anabolism and how many non-annotated or non known function genes are. Give me a table with this summary
 ```
@@ -70,11 +72,15 @@ What is the result?
 
 3. We can check for CAZy genes by prompting:
 
+### 🤖 Copilot prompt
+
 ```copilot
 Check for carbohydrate active genes (CAZymes), give a summary table
 ```
 
 4. Produce a plot with this information:
+
+### 🤖 Copilot prompt
 
 ```copilot
 using this information produce a barplot of the annotation genes. Give me the code to reproduce
