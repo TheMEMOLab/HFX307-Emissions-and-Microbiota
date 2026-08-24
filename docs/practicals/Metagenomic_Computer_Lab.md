@@ -36,4 +36,53 @@ Once completed all jobs will appear as green:
 ![completed](../images/completed.png)
 
 
+Prokka producces different files:
+
+| File | Contains |
+|---|---|
+| `.gff` | Genome annotation in GFF3 format, including the coordinates and annotation of predicted genes, CDSs, rRNAs, tRNAs and other features. |
+| `.gbk` | GenBank-formatted annotated genome containing the DNA sequence together with all predicted genomic features and annotations. |
+| `.faa` | Amino-acid sequences of all predicted protein-coding genes. This is the main file used for downstream protein-function analyses. |
+| `.ffn` | Nucleotide sequences of all predicted genes and other annotated features. |
+| `.fna` | Nucleotide sequence of the input contigs/genome. |
+| `.tbl` | Feature table containing the locations and annotations of genomic features, mainly used for submission to sequence databases. |
+| `.sqn` | Sequin-formatted file prepared for submission to GenBank/ENA-type repositories. |
+| `.txt` | Short summary of the annotation, including the number of contigs, CDSs, rRNAs, tRNAs and other predicted features. |
+| `.log` | Log file recording the Prokka run, parameters and processing steps. |
+
+We can then use the .tbl file to extract the annotation. To save open the ```10. Prokka on data 1: tsv``` file and click on the disk button:
+
+![disk](../images/savetable.png)
+
+## Using Copilot to summarize the information of the Prokka annotation.
+
+Use your NMBU account to login into [Microsoft-Copilot](https://copilot.com/). 
+
+1. Upload the tsv file using the ```+``` button.
+
+2. Once your file is up, lets use this prompt:
+
+```copilot
+Hi, use the annotation table attached from prokka. Let me know how many genes are from metabolism, anabolism and how many non-annotated or non known function genes are. Give me a table with this summary
+```
+
+What is the result?
+
+3. We can check for CAZy genes by prompting:
+
+```copilot
+Check for carbohydrate active genes (CAZymes), give a summary table
+```
+
+4. Produce a plot with this information:
+
+```copilot
+using this information produce a barplot of the annotation genes. Give me the code to reproduce
+```
+
+
+### What other idea do you think we can look using this tools?
+
+
+
 
