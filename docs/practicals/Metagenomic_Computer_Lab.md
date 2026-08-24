@@ -10,7 +10,13 @@ In this exercise, Prokka will be used to annotate the MAG and generate the predi
 1. The first we need a fasta file, let's download the file from [here](https://ns9864k.web.sigma2.no/TheMEMOLab/courses/hfx307_407/Genome/)
     - Do click on the ```Control_HighE.metabat.733.fa``` file an save link as. Save it to your PC.
 
-2. We can use Galaxy, a web-based platform for data intensive life science research that provides users with a unified, easy-to-use graphical interface to a host of different analysis tools, to launch Prokka and 
-annotate our genome. Let's login to [Galaxy](https://usegalaxy.no/) using our Feide credentials. Then look for Prokka in the Tools search ![Prokka in Galaxy](../images/prokka.png)
+2. We can use Galaxy, a web-based platform for data intensive life science research that provides users with a unified, easy-to-use graphical interface to a host of different analysis tools to launch Prokka and 
+annotate our genome. Let's login to [Galaxy](https://usegalaxy.no/) using our Feide credentials. 
 
+3. Upload the fasta file using the ```upload``` buttom as it is shown here ![upload](../images/Upload.png)
+
+4. Once uploaded you shoudl see it 
+
+
+Then look for Prokka in the Tools search ![Prokka in Galaxy](../images/prokka.png)
 
