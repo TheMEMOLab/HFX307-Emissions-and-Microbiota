@@ -20,5 +20,13 @@ annotate our genome. Let's login to [Galaxy](https://usegalaxy.no/) using our Fe
 
 5. To launch Prokka we can look for it in the Tools search ![Prokka in Galaxy](../images/prokka.png). 
 
-6. Select the ```Control_HighE.metabat.733.fa``` file adn 
+6. Select the ```Control_HighE.metabat.733.fa``` file and press ```run Tool```. Jobs are submitted now:
+
+![Job](../images/jobsubmission.png)
+
+Once completed all jobs will appear as green: 
+
+![completed](../images/completed.png)
+
+
 
