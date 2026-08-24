@@ -7,6 +7,10 @@
 In this exercise, Prokka will be used to annotate the MAG and generate the predicted protein sequences that will be used for downstream functional analyses.
 
 
-1. We will perfomr the annotations using the Galaxy servers. So let's connect to [Galaxy](https://usegalaxy.no/)
+1. The first we need a fasta file, let's download the file from [here](https://ns9864k.web.sigma2.no/TheMEMOLab/courses/hfx307_407/Genome/)
+    - Do click on the ```Control_HighE.metabat.733.fa``` file an save link as. Save it to your PC.
+
+2. We can use Galaxy, a web-based platform for data intensive life science research that provides users with a unified, easy-to-use graphical interface to a host of different analysis tools, to launch Prokka and 
+annotate our genome. Let's login to [Galaxy](https://usegalaxy.no/) using our Feide credentials. Then look for Prokka in the Tools search [!prokka](images/prokka.png)
 
 
