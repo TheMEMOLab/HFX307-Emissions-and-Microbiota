@@ -90,5 +90,5 @@ using this information produce a barplot of the annotation genes. Give me the co
 ### What other idea do you think we can look using this tools?
 
 
-
+Unfortunatelly Prokka is not a specific tool for CAZy discovery. Let's use a specific tool for CAZy Discovery dbCAN
 
