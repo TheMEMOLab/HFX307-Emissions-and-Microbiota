@@ -1,3 +1,10 @@
+---
+layout: default
+title: Practicals 1 - Computer Lab
+---
+
+[← Home](../index.md)
+
 # HFX307/407 Metagenomic Computer Lab
 
 ## Exercise A – Genome annotation in bacteria and archaea – genomes and MAGs
