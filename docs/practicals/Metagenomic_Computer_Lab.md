@@ -83,12 +83,32 @@ Check for carbohydrate active genes (CAZymes), give a summary table
 ### 🤖 Copilot prompt
 
 ```copilot
-using this information produce a barplot of the annotation genes. Give me the code to reproduce
+using this information produce 2 barplots a) general summary and b) Barplot for CAZy genes. Display the plots here and also give me the links to download them as png files.
 ```
 
 
 ### What other idea do you think we can look using this tools?
 
 
-Unfortunatelly Prokka is not a specific tool for CAZy discovery. Let's use a specific tool for CAZy Discovery dbCAN
+
+
+Unfortunatelly Prokka is not a specific tool for CAZy discovery. Let's use a specific tool for CAZy Discovery dbCAN. 
+
+
+## Excersice B Predicting CAZyme function using CAZyDB
+
+1. Get the the amino acid annotated file from Galaxy: ```Prokka on data 1 faa```
+
+![aminoacid](../images/aminoacid.png)
+
+
+2. Go to blast in [dbCAN](https://pro.unl.edu/dbCAN2/blast.php)
+
+
+3. Use your institutional email and submit the file. Is something wrong?
+
+![wrong](../images/wrong.png)
+
+
+
 
