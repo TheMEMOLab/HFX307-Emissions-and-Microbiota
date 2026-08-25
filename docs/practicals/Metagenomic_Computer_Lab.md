@@ -160,3 +160,5 @@ Finish with a short biological interpretation of what these CAZyme profiles migh
 ```
 
 
+### Which conclusions in your interpretation are strongest, and which are the most uncertain?
+
