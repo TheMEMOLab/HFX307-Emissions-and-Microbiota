@@ -199,26 +199,54 @@ In a new Copilot chat, upload both the Prokka and DBCAN tables and then use this
 ### 🤖 Copilot prompt
 
 ```Copilot
-# Copilot Prompt: Generate a Prokka + dbCAN Annotation Report with Biological Interpretation
+# Copilot Prompt: Generate a Self-Contained Prokka + dbCAN Biological Annotation Report
 
-Using the attached **Prokka annotation results** and **dbCAN overview table**, generate a complete scientific annotation report for this bacterial genome or MAG.
+Using the attached **Prokka annotation results** and **dbCAN overview table**, generate a complete scientific report that summarizes and biologically interprets the genome annotation and carbohydrate-active enzyme annotation.
 
-The report must not only summarize the annotation results, but also provide a **clear biological interpretation of what the genome may be capable of doing**, especially regarding carbohydrate metabolism and polysaccharide utilization.
+The report must not only show counts and plots. It must explain what the annotation suggests biologically, while clearly distinguishing direct evidence from interpretation and uncertainty.
 
 Create both:
 
 1. `annotation_report.html`
 2. `annotation_report.md`
 
-The HTML report must be fully self-contained and portable.
+The HTML report must be a **single fully self-contained file** that displays all tables, figures, text, captions, and interpretations correctly when opened directly in a web browser.
 
 ---
 
-## 1. Input data and genome overview
+# 1. General analysis rules
 
-Use only the information present in the attached Prokka and dbCAN files.
+Use only information contained in the attached Prokka and dbCAN files as primary evidence.
 
-Start with a short description of the input data and report, when available:
+Do not invent:
+
+- genes
+- proteins
+- CAZy families
+- enzyme functions
+- pathway assignments
+- substrate specificity
+- metabolic capabilities
+- ecological functions
+- gene counts
+
+If information cannot be determined reliably from the input files, explicitly state:
+
+**This analysis cannot be completed reliably from the provided files.**
+
+Do not guess.
+
+Preserve gene identifiers exactly as provided in the source files.
+
+Do not silently remove, rename, merge, or reorder genes.
+
+---
+
+# 2. Dataset overview
+
+Start with a short description of the input data.
+
+Report, when available:
 
 - number of contigs
 - total genome size
@@ -230,21 +258,19 @@ Start with a short description of the input data and report, when available:
 - tmRNAs
 - ncRNAs
 - repeat regions
-- other relevant feature types reported by Prokka
+- other relevant Prokka feature types
 
 Present these results in a compact summary table.
 
-After the table, include a short **biological interpretation** explaining what the annotation profile suggests about the genome, while avoiding unsupported conclusions.
+After the table, provide a short biological interpretation describing what the annotation profile suggests about the genome.
 
-For example, discuss whether the genome appears highly annotated or contains many hypothetical proteins, and what this means for downstream functional interpretation.
-
-If a value cannot be calculated from the supplied files, state that clearly instead of guessing.
+For example, discuss whether a large fraction of proteins remain hypothetical and what that means for confidence in downstream functional interpretation.
 
 ---
 
-## 2. Prokka annotation summary
+# 3. Prokka annotation summary
 
-Create a bar plot summarizing the major genomic feature types identified by Prokka.
+Create a bar plot summarizing the main genomic annotation categories identified by Prokka.
 
 Where available, include:
 
@@ -258,28 +284,28 @@ Where available, include:
 - repeat regions
 - other relevant annotation categories
 
-Clearly explain how each category was calculated.
-
-### Biological interpretation
-
-Immediately below the figure, provide a concise interpretation of the result.
-
-Discuss, where supported:
-
-- the proportion of predicted proteins with functional annotations
-- the proportion of hypothetical proteins
-- whether the annotation suggests a well-characterized or poorly characterized genome
-- any notable abundance of particular annotation categories
+Explain clearly how each category was calculated.
 
 Do not treat Prokka predictions as experimentally confirmed functions.
 
+## Biological interpretation
+
+Immediately below the figure, interpret the result.
+
+Discuss, where supported:
+
+- proportion of predicted proteins with functional annotation
+- proportion of hypothetical proteins
+- whether the genome appears well characterized or poorly characterized
+- any notable abundance of particular annotation categories
+
 ---
 
-## 3. Putative carbohydrate-related genes from Prokka
+# 4. Putative carbohydrate-related functions from Prokka
 
-Search the Prokka functional annotations for genes that may be associated with carbohydrate metabolism or carbohydrate-active enzyme functions.
+Search the Prokka annotations for genes potentially associated with carbohydrate metabolism.
 
-Possible terms or categories may include:
+Possible terms may include:
 
 - glycoside hydrolases
 - glycosyltransferases
@@ -292,35 +318,36 @@ Possible terms or categories may include:
 - polysaccharide degradation
 - carbohydrate biosynthesis
 
-Create a bar plot summarizing the major putative carbohydrate-related functions identified from Prokka.
+Create a bar plot summarizing the main putative carbohydrate-related functional categories.
 
 Clearly label this analysis as:
 
 **Putative carbohydrate-related functions inferred from Prokka annotations**
 
-Do not treat this analysis as equivalent to a dedicated CAZyme annotation.
+Do not treat Prokka carbohydrate annotations as equivalent to dedicated CAZyme annotation.
 
-Do not assign specific CAZy families unless they are explicitly present in the Prokka annotation.
+Do not assign CAZy families unless those families are explicitly present in the Prokka annotation.
 
-### Biological interpretation
+## Biological interpretation
 
-Explain what these annotations may suggest about the organism's carbohydrate metabolism.
+Explain what these Prokka annotations may suggest about carbohydrate metabolism.
 
 Discuss:
 
-- whether carbohydrate degradation, transport, or biosynthesis functions appear abundant
-- which broad types of carbohydrate-associated functions are most represented
-- whether the genome appears to encode diverse or relatively limited carbohydrate-associated functions
+- degradation-related functions
+- transport-related functions
+- biosynthetic functions
+- whether carbohydrate-associated functions appear diverse or limited
 
-Clearly distinguish between direct annotation and inferred biological meaning.
+Clearly distinguish direct annotation from biological inference.
 
 ---
 
-## 4. dbCAN CAZyme annotation
+# 5. dbCAN CAZyme annotation
 
-Using the dbCAN overview table, summarize the carbohydrate-active enzymes detected.
+Using the dbCAN overview table, summarize the carbohydrate-active enzymes identified.
 
-Report the number of genes assigned to the main CAZy classes:
+Report the number of genes assigned to the major CAZy classes:
 
 - GH — Glycoside Hydrolases
 - GT — GlycosylTransferases
@@ -331,64 +358,73 @@ Report the number of genes assigned to the main CAZy classes:
 
 Create a bar plot showing the number of genes in each CAZy class.
 
-Also provide a summary table containing, where available:
+Also create a properly formatted summary table containing, when available:
 
 - CAZy family
 - CAZy class
 - number of genes
-- predicted or general biological role
-- supporting dbCAN annotation
+- general biological role
+- supporting annotation
 
-### Biological interpretation
+Do not report raw Python objects.
 
-Interpret the overall CAZyme class composition.
+For example, do not display:
+
+`{'GT': 26, 'GH': 141, 'CE': 25}`
+
+Instead, convert these values into a proper HTML table, Markdown table, or figure.
+
+## Biological interpretation
+
+Interpret the overall CAZyme profile.
 
 Discuss, where supported:
 
-- whether hydrolytic enzymes such as GHs dominate
-- whether glycosyltransferases are abundant
-- the relative contribution of CE, PL, AA, and CBM classes
-- whether the CAZyme profile suggests stronger potential for polysaccharide degradation, modification, or synthesis
+- whether GHs dominate
+- whether GTs are abundant
+- contribution of CE, PL, AA, and CBM classes
+- whether the profile appears more strongly associated with carbohydrate degradation, modification, binding, or biosynthesis
 
-Avoid inferring exact substrates based only on CAZy class membership.
+Do not infer specific substrates based only on CAZy class membership.
 
 ---
 
-## 5. Most abundant CAZy families
+# 6. Most abundant CAZy families
 
 Identify the most abundant CAZy families in the dbCAN results.
 
-Create a ranked bar plot showing the 10–20 most abundant CAZy families.
+Create a ranked bar plot showing the 10–20 most abundant families.
 
 If fewer than 10 families are present, show all families.
 
-Sort the plot from most abundant to least abundant.
+Sort from most abundant to least abundant.
 
-For each family, report:
+Create a table containing:
 
-- CAZy family name
+- CAZy family
 - CAZy class
-- number of associated genes
+- number of genes
 - general functional role, when supported
 
-### Biological interpretation
+## Biological interpretation
 
-For the most abundant families:
+Interpret the most abundant families.
 
-- explain their general biological roles
-- identify whether they are mainly associated with degradation, modification, binding, or biosynthesis of carbohydrates
-- discuss whether several abundant families appear to target related carbohydrate structures
-- identify broader patterns rather than simply listing individual genes
+Discuss:
 
-Do not infer specific substrates when family-level information is insufficient.
+- whether the dominant families are primarily associated with degradation, modification, binding, or biosynthesis
+- whether several abundant families appear to participate in related biological processes
+- whether particular CAZyme groups appear unusually prominent
+
+Avoid assigning exact substrates when family-level evidence is insufficient.
 
 ---
 
-## 6. Predicted polysaccharide utilization
+# 7. Predicted polysaccharide utilization
 
-Using the dbCAN results, identify CAZyme genes that may be associated with metabolism of major polysaccharide groups.
+Using the dbCAN annotation, identify genes or CAZy families that may be associated with metabolism of major polysaccharide groups.
 
-Where supported by the annotation, consider categories such as:
+Where supported by the available annotation, consider:
 
 - cellulose
 - hemicellulose
@@ -404,97 +440,99 @@ Where supported by the annotation, consider categories such as:
 - host-derived glycans
 - other relevant polysaccharides
 
-Create a bar plot showing the **percentage of CAZyme genes associated with each polysaccharide category**.
+Create a bar plot showing either:
 
-For each polysaccharide assignment:
+- percentage of CAZyme genes associated with each substrate category
 
-- explain the rule used to connect CAZy families to the substrate category
-- distinguish direct annotation from biological inference
-- allow a gene to occur in more than one substrate category if the predicted CAZyme has multiple plausible substrates
-- clearly state if percentages therefore do not sum to 100%
+or, if percentages are not meaningful:
 
-Do not assign a CAZy family to a specific polysaccharide when family-level information alone is insufficient.
+- number of genes associated with each substrate category
 
-If this analysis cannot be completed reliably from the supplied dbCAN table, explain what additional information would be required rather than guessing.
+Clearly state which denominator is used.
 
-### Biological interpretation
+For every substrate assignment:
 
-Discuss which polysaccharide-utilization capacities appear best supported.
+- explain how the CAZy family was associated with the substrate
+- distinguish direct annotation from inference
+- allow genes to occur in more than one category when biologically appropriate
+- state clearly if percentages therefore do not sum to 100%
 
-For example:
+Do not assign a substrate when CAZy family membership alone does not support it.
 
-- Which substrate categories have the strongest genomic support?
-- Is there evidence for broad polysaccharide utilization or specialization?
-- Are several complementary CAZyme families present for the same substrate class?
-- Which substrate predictions are strongest and which are weak or uncertain?
-
-Do not state that the organism definitively degrades a substrate unless the annotation evidence is sufficiently strong.
-
-Prefer phrases such as:
-
-> The CAZyme repertoire suggests potential capacity for...
-
-or
-
-> Several CAZyme families are consistent with the utilization of...
-
----
-
-## 7. Comparison between Prokka and dbCAN
-
-Compare the carbohydrate-related annotations obtained from Prokka and dbCAN.
-
-Explain:
-
-- what Prokka is detecting
-- what dbCAN is detecting
-- why the two approaches may identify different numbers of carbohydrate-related genes
-- why dbCAN is more appropriate for dedicated CAZyme annotation
-- where the two methods appear to agree
-- where their annotations differ
-
-If gene identifiers can be reliably matched between the two datasets, identify genes supported by both Prokka and dbCAN.
-
-Do not force a match when identifiers cannot be connected reliably.
-
-Provide a small comparison table when possible.
-
-### Biological interpretation
-
-Explain what additional biological information is obtained by combining Prokka and dbCAN rather than using either annotation alone.
-
----
-
-# 8. Integrated biological interpretation
-
-This section is essential.
-
-Write a biological synthesis integrating the Prokka and dbCAN results.
-
-Do not simply repeat the previous tables and plots.
-
-Interpret the genome as a biological system.
+## Biological interpretation
 
 Discuss:
 
-### General functional potential
+- which polysaccharide categories have the strongest genomic support
+- whether the CAZyme repertoire suggests broad utilization or specialization
+- whether several complementary CAZyme families support the same substrate category
+- which predictions are strongest and which remain uncertain
 
-- What broad functional patterns are visible in the genome?
+Use cautious wording such as:
+
+> The CAZyme repertoire suggests potential capacity for...
+
+rather than:
+
+> This organism degrades...
+
+unless the evidence is sufficiently strong.
+
+---
+
+# 8. Comparison between Prokka and dbCAN
+
+Compare carbohydrate-related information obtained from Prokka and dbCAN.
+
+Explain:
+
+- what Prokka detects
+- what dbCAN detects
+- why the two tools may identify different numbers of carbohydrate-related genes
+- why dbCAN provides more specialized CAZyme annotation
+- where results agree
+- where they differ
+
+If gene identifiers can be matched reliably, identify genes supported by both approaches.
+
+Do not force matches when identifiers cannot be connected reliably.
+
+Create a comparison table when possible.
+
+## Biological interpretation
+
+Explain what additional biological understanding is gained by combining Prokka and dbCAN.
+
+---
+
+# 9. Integrated biological interpretation
+
+This section is mandatory and must be substantial.
+
+Do not simply repeat the figures or gene counts.
+
+Synthesize the results into a biological interpretation of the genome.
+
+Discuss:
+
+## General functional potential
+
+- What broad functional patterns are visible?
 - How much of the genome has interpretable functional annotation?
-- Are there major groups of functions that appear particularly important?
+- Are many proteins still hypothetical?
 
-### Carbohydrate metabolism
+## Carbohydrate metabolism
 
-- How important does carbohydrate metabolism appear to be in this genome?
-- Does the organism encode many or few carbohydrate-active enzymes relative to the total annotated genome?
-- Which CAZyme classes dominate?
-- Which CAZy families contribute most strongly to the observed profile?
+- How prominent does carbohydrate metabolism appear to be?
+- Which CAZy classes dominate?
+- Which families contribute most strongly?
+- Does the genome appear rich in carbohydrate-active enzymes?
 
-### Potential polysaccharide utilization
+## Potential polysaccharide utilization
 
-Identify the polysaccharides for which genomic support is strongest.
+Identify the substrate categories with the strongest genomic support.
 
-Explain what specific CAZy families or combinations of families support each conclusion.
+For each major predicted substrate category, explain which CAZy families or annotations support that interpretation.
 
 Where possible, distinguish between:
 
@@ -504,55 +542,46 @@ Where possible, distinguish between:
 - carbohydrate modification
 - carbohydrate biosynthesis
 
-### Ecological interpretation
+## Ecological implications
 
-Based only on the genomic evidence, discuss what the carbohydrate-utilization profile might suggest about the possible ecological strategy of the organism.
+Based only on the genomic evidence, discuss cautiously what the carbohydrate-utilization profile might suggest about the organism's ecological strategy.
 
-Examples of appropriate questions include:
+Questions to consider:
 
-- Does the genome suggest adaptation to an environment rich in complex carbohydrates?
-- Does it appear more specialized or metabolically versatile?
-- Does the CAZyme repertoire suggest reliance on complex polysaccharides or simpler carbohydrates?
-- Are there enzyme combinations consistent with degradation of plant-derived, microbial, or host-associated glycans?
+- Does the genome suggest adaptation to complex-carbohydrate-rich environments?
+- Does the CAZyme repertoire appear specialized or broad?
+- Are there enzyme combinations consistent with plant-derived, microbial, or host-associated glycans?
 
-Only discuss ecological implications that are reasonably supported by the annotation.
-
-Do not infer habitat, host association, or lifestyle purely from prior knowledge of the organism unless that information is explicitly supplied in the input data.
+Do not infer habitat, host association, or lifestyle based only on external knowledge unless that information is explicitly provided in the input files.
 
 ---
 
-# 9. Evidence strength
+# 10. Evidence strength
 
-For the major biological conclusions, classify the strength of evidence.
+Create a table summarizing the major biological interpretations.
 
-Use a table with columns such as:
+Use columns such as:
 
 | Biological interpretation | Supporting evidence | Evidence strength |
-|---|---|---|
-| Potential utilization of X | GHxx, GHxx, CExx | Strong / Moderate / Weak |
-| Carbohydrate biosynthesis | GT families | Moderate |
-| Potential degradation of Y | single family assignment | Weak |
 
-Use the following definitions:
+Classify evidence as:
 
-**Strong evidence**  
+**Strong**
 Several complementary annotations support the same biological process.
 
-**Moderate evidence**  
-One or more relevant annotations support the interpretation, but functional or substrate ambiguity remains.
+**Moderate**
+One or more relevant annotations support the interpretation, but ambiguity remains.
 
-**Weak evidence**  
-The interpretation is based mainly on broad family-level association or limited evidence.
+**Weak**
+The interpretation depends mainly on broad family-level associations or limited evidence.
 
 ---
 
-# 10. Direct evidence, interpretation, and hypotheses
+# 11. Direct evidence, interpretation, and hypotheses
 
-Clearly separate conclusions into three categories:
+Clearly separate conclusions into:
 
-### Direct evidence
-
-Results explicitly reported by Prokka or dbCAN.
+## Direct evidence
 
 Examples:
 
@@ -560,17 +589,13 @@ Examples:
 - presence of GH43
 - number of GT genes
 
-### Supported interpretation
-
-Biological conclusions reasonably supported by several annotations.
+## Supported interpretation
 
 Example:
 
 > Multiple xylan-associated CAZyme families suggest potential capacity for xylan utilization.
 
-### Hypotheses
-
-Potential biological or ecological roles that require additional validation.
+## Hypotheses
 
 Example:
 
@@ -580,203 +605,214 @@ Do not present hypotheses as established facts.
 
 ---
 
-# 11. Limitations and uncertainty
+# 12. Limitations and uncertainty
 
-Include a dedicated section explaining the main limitations.
+Include a dedicated limitations section.
 
-Discuss, when relevant:
+Discuss, where relevant:
 
 - gene prediction uncertainty
 - hypothetical proteins
-- incomplete functional annotations
+- incomplete functional annotation
 - CAZy family-level versus enzyme-level annotation
 - substrate ambiguity
 - multifunctional CAZyme families
-- inability to infer enzyme activity from genome presence alone
-- differences between annotation tools
-- incomplete MAGs, if relevant
+- inability to infer biological activity from genome content alone
+- incomplete MAGs
+- differences between annotation methods
 
 Explicitly state:
 
-> Genome annotation describes metabolic potential, not demonstrated biological activity.
+**Genome annotation describes metabolic potential, not demonstrated biological activity.**
 
-Where appropriate, suggest what additional information could strengthen the conclusions, such as:
+Where appropriate, mention additional data that could improve biological interpretation, such as:
 
 - KEGG pathway reconstruction
 - transcriptomics
 - proteomics
 - metabolomics
-- enzyme assays
-- growth experiments on specific carbohydrates
+- biochemical assays
+- growth experiments
 
 ---
 
-# 12. Conclusions
+# 13. Conclusions
 
-Finish with a concise biological conclusion of approximately 1–3 paragraphs.
-
-The conclusion should answer:
+Finish with 1–3 concise paragraphs answering:
 
 1. What are the main functional characteristics of this genome?
-2. What does dbCAN reveal about its carbohydrate-active enzyme repertoire?
+2. What does dbCAN reveal about the CAZyme repertoire?
 3. Which carbohydrate or polysaccharide utilization capacities are best supported?
-4. What is the strongest biological interpretation supported by the combined evidence?
+4. What is the strongest biological interpretation?
 5. What remains uncertain?
 
 Do not simply repeat numerical results.
 
-The conclusion should synthesize the data into a biological interpretation.
-
 ---
 
-# 13. Figures
+# 14. Required figures
 
-The report should contain at least the following plots when supported by the data:
+Include the following when supported by the data:
 
-### Figure 1
+## Figure 1
 **Prokka annotation summary**
 
-Counts of major genomic features and annotation categories.
-
-### Figure 2
+## Figure 2
 **Putative carbohydrate-related functions from Prokka**
 
-Carbohydrate-associated genes inferred from Prokka functional annotations.
-
-### Figure 3
+## Figure 3
 **dbCAN CAZy classes**
 
-Number of genes assigned to GH, GT, CE, PL, AA, and CBM classes.
-
-### Figure 4
+## Figure 4
 **Most abundant CAZy families**
 
-Ranked abundance of the most common CAZy families.
-
-### Figure 5
+## Figure 5
 **Predicted polysaccharide utilization**
 
-Percentage or number of CAZyme genes associated with different polysaccharide categories.
-
-Use clear axis labels, readable category names, informative figure titles, and concise figure captions.
-
-Where category names are long, use horizontal bar plots.
-
----
-
-# 14. Figure interpretation requirement
+Use readable labels and horizontal bar plots for long category names.
 
 Every figure must be followed by:
 
-1. A short description of what the figure shows.
-2. A biological interpretation.
-3. A statement of important uncertainty or limitations where relevant.
-
-Do not produce a sequence of plots without interpreting them.
+1. a short description
+2. a biological interpretation
+3. a note on uncertainty where relevant
 
 ---
 
-# 15. Tables
+# 15. Required tables
 
-Include useful summary tables, including when possible:
+Include when possible:
 
-### Table 1
-Genome annotation summary from Prokka.
+## Table 1
+Genome annotation summary from Prokka
 
-### Table 2
-Most abundant CAZy families from dbCAN.
+## Table 2
+Most abundant CAZy families from dbCAN
 
-### Table 3
-Predicted polysaccharide associations and the CAZy families supporting each assignment.
+## Table 3
+Predicted polysaccharide associations
 
-### Table 4
-Comparison between Prokka carbohydrate-related annotations and dbCAN annotations.
+## Table 4
+Comparison between Prokka and dbCAN
 
-### Table 5
-Major biological interpretations and evidence strength.
-
----
-
-# 16. Report structure
-
-Use the following structure in both reports:
-
-1. Title
-2. Dataset overview
-3. Prokka genome annotation
-4. Putative carbohydrate-related annotations from Prokka
-5. dbCAN CAZyme annotation
-6. Major CAZy families
-7. Predicted polysaccharide utilization
-8. Comparison of Prokka and dbCAN
-9. Integrated biological interpretation
-10. Evidence strength
-11. Limitations and uncertainty
-12. Conclusions
-13. Methods
+## Table 5
+Major biological interpretations and evidence strength
 
 ---
 
-# HTML OUTPUT REQUIREMENTS
+# 16. HTML rendering requirements
 
-Create a single file named:
+Create:
 
 `annotation_report.html`
 
-The HTML report must be **fully self-contained and portable**.
+The HTML file must use **native HTML elements**, not raw Markdown pasted into HTML.
 
-All content required to display the report must be contained directly inside this single HTML file.
+Do not generate Markdown and simply insert it into an HTML template.
 
-## Important HTML requirements
+Convert all content into proper HTML.
 
-- Embed every plot directly inside the HTML.
-- Do not link to external image files.
-- Do not require a `figures/`, `images/`, `assets/`, or other directory.
-- Prefer embedding generated plots as Base64-encoded images using:
+For example:
+
+- headings must use `<h1>`, `<h2>`, `<h3>`
+- paragraphs must use `<p>`
+- tables must use `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and `<td>`
+- lists must use `<ul>`, `<ol>`, and `<li>`
+- bold text must use `<strong>`
+- figures should use `<figure>`, `<img>`, and `<figcaption>`
+
+Do not leave visible Markdown syntax such as:
+
+- `## Heading`
+- `| Column | Column |`
+- `**bold**`
+- `---`
+
+Do not display Python dictionaries, lists, DataFrames, tuples, or object representations directly.
+
+Convert intermediate Python objects into formatted HTML tables or prose.
+
+---
+
+# 17. HTML table requirements
+
+All tables in the HTML must render as real HTML tables.
+
+Do not insert Markdown tables into HTML.
+
+Use embedded CSS for readability.
+
+For example, apply:
+
+- collapsed borders
+- readable padding
+- bold headers
+- alternating row shading if useful
+- responsive width
+- appropriate alignment for numeric columns
+
+The HTML must display tables correctly when opened directly in a browser.
+
+---
+
+# 18. Self-contained HTML requirements
+
+The final HTML must be a **single fully portable file**.
+
+All plots, styles, tables, text, and captions must be contained directly inside:
+
+`annotation_report.html`
+
+Do not require:
+
+- `figures/`
+- `images/`
+- `assets/`
+- external CSS
+- external JavaScript
+- internet access
+- CDN resources
+- external fonts
+
+Embed all plots directly in the HTML.
+
+Prefer Base64-encoded images such as:
 
 `data:image/png;base64,...`
 
-- Do not use relative local paths such as:
+Do not use:
 
 `src="figures/plot.png"`
 
-- Do not use absolute local paths.
-- Do not depend on an internet connection.
-- Do not load JavaScript libraries from CDNs.
-- Do not load external CSS.
-- Do not load external fonts.
-- Include all CSS directly inside the HTML file.
-- Include all tables directly in the HTML.
-- Include all captions, results, and biological interpretations directly in the HTML.
-
-Use a clean scientific-report style with readable figures, tables, headings, and spacing.
+Do not use absolute local file paths.
 
 ---
 
-## Critical HTML portability test
+# 19. HTML portability test
 
-Before finishing, imagine that only:
+Before finishing, imagine that:
 
 `annotation_report.html`
 
-is copied to another computer and **all other files are deleted**.
+is copied to a different computer and **every other file is deleted**.
 
 The report must still display:
 
-- all text
+- all headings
+- all paragraphs
 - all tables
 - all plots
-- all captions
+- all figure captions
 - all biological interpretations
 - all formatting
 
 correctly.
 
-If any plot requires another local file, the HTML report is not complete.
+If any image or table depends on another file, the HTML is incomplete.
 
 ---
 
-# Markdown output requirements
+# 20. Markdown report
 
 Also create:
 
@@ -784,63 +820,45 @@ Also create:
 
 The Markdown report should contain the same:
 
-- results
+- analysis
 - tables
-- biological interpretations
+- biological interpretation
 - conclusions
-- headings
 - figure captions
 
 as the HTML report.
 
----
+The Markdown version may use external figure files if necessary.
 
-# Data integrity requirements
-
-Use only the attached files as primary evidence.
-
-Do not invent:
-
-- genes
-- proteins
-- CAZy families
-- enzyme functions
-- metabolic pathways
-- substrate specificities
-- ecological functions
-- gene counts
-
-If information required for an analysis is missing, explicitly state:
-
-**This analysis cannot be completed reliably from the provided files.**
-
-Do not guess.
-
-Preserve gene identifiers exactly as provided.
+The HTML version must not.
 
 ---
 
-# Final validation
+# 21. Final validation
 
 Before producing the final files, verify that:
 
-- gene counts are internally consistent
+- no raw Markdown appears in the HTML
+- no Markdown table pipes are visible in the HTML
+- no Python dictionary syntax appears in the HTML
+- all tables are native HTML tables
+- all plots are visible
+- all plots are embedded directly inside the HTML
+- all gene counts are internally consistent
 - CAZy class counts are correct
 - percentages are calculated correctly
-- plot values match the tables
-- reported text matches the plots
+- plot values match tables
+- plot values match the text
 - every major figure has biological interpretation
 - every major biological claim identifies supporting evidence
-- uncertain interpretations are clearly labeled
+- uncertainty is clearly labeled
 - unsupported metabolic claims are absent
-- every plot is embedded inside the standalone HTML
-- the HTML does not contain broken file links
 
 Most importantly:
 
-**Do not produce a report that only describes the figures. Interpret what the annotation means biologically. The final report must explain what the genome appears capable of doing, why the data support that interpretation, and what remains uncertain.**
+**Do not produce a report that only describes counts and figures. The report must explain what the annotation means biologically, what evidence supports those conclusions, and what remains uncertain.**
 
-Finish by producing:
+Finish by generating:
 
 `annotation_report.html`
 
@@ -848,6 +866,6 @@ and
 
 `annotation_report.md`
 
-and make both files available for download.
+and make both available for download.
 ```
 
