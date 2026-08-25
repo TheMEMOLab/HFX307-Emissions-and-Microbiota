@@ -1,0 +1,68 @@
+<html><body><pre># Annotation Report
+
+## Dataset overview
+
+|Metric|Value|
+|---|---:|
+|CDS|2748|
+|Hypothetical proteins|1437|
+|Annotated proteins|1311|
+|rRNA|9|
+|tRNA|44|
+|tmRNA|1|
+
+## Prokka genome annotation
+Figure 1: figures/prokka_annotation_summary.png
+
+## Putative carbohydrate-related annotations from Prokka
+Figure 2: figures/prokka_putative_cazy.png
+
+## dbCAN CAZyme annotation
+CAZy classes: {'GH': 141, 'GT': 26, 'CE': 25, 'PL': 2, 'AA': 0, 'CBM': 8}
+
+Top families:
+
+| family   |   count |
+|:---------|--------:|
+| GT2      |       9 |
+| CE1      |       9 |
+| GH92     |       9 |
+| GH3      |       7 |
+| GH97     |       7 |
+| GH2_1    |       6 |
+| GH28     |       5 |
+| GT4      |       5 |
+| GH31_4   |       4 |
+| GH43_7   |       4 |
+| GH105    |       4 |
+| CE12     |       4 |
+| GH2_20   |       3 |
+| GH29     |       3 |
+| GH9      |       3 |
+| GT119    |       3 |
+| GH13_46  |       3 |
+| GH25     |       3 |
+| GH43_10  |       3 |
+| CBM91    |       3 |
+
+## Major CAZy families
+Figure: figures/dbcan_top_families.png
+
+## Predicted polysaccharide utilization
+Figure: figures/polysaccharide_metabolism.png
+Percentages may exceed 100% collectively because families can map to multiple substrate categories.
+
+## Comparison of Prokka and dbCAN
+Prokka provides broad genome annotations, while dbCAN specifically identifies CAZyme families. Several xylan-, arabinan-, pectin-, starch- and cellulose-related functions appear in both datasets.
+
+## Biological interpretation
+Direct evidence: dbCAN identified numerous GH families, with GH and GT dominating. Prokka annotations include xylanases, arabinofuranosidases, beta-glucosidases, amylases, pectinases and Sus-like carbohydrate utilization proteins. Supported interpretation: the genome encodes a diverse carbohydrate-processing repertoire, particularly for plant cell-wall associated polysaccharides. Hypotheses: ecological adaptation to complex carbohydrate-rich environments requires validation.
+
+## Limitations and uncertainty
+Counts are based on provided files only. Family-to-substrate assignments are conservative and inference-based.
+
+## Conclusions
+The genome contains a large and diverse CAZyme repertoire dominated by GH families, with evidence for utilization of xylan, pectin, starch, cellulose-related and other complex carbohydrates.
+
+## Methods
+Feature counts were derived from Prokka TSV annotations. CAZy classes and families were parsed from dbCAN HMMER assignments.</pre></body></html>
