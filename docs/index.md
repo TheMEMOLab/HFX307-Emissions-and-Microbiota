@@ -22,3 +22,9 @@ The course explores the connections between **ruminant nutrition, microbial ferm
 | Practical | Topic | Material |
 |---|---|---|
 | 1 | Getting started with microbiome data | [Practical](practicals/Metagenomic_Computer_Lab.md) |
+
+## 💾 Data
+
+| Dataset | Description | Material |
+|---|---|---|
+| Genome | Genome sequence used for the annotation practical | [🧬 Data]({{ site.baseurl }}/data/GENOME_FILENAME.fasta) |
