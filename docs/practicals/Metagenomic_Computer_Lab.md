@@ -135,5 +135,28 @@ After cleaning the file, produce a downloadable FASTA file that I can use as inp
 ![dbacan](../images/dbcan.png)
 
 
+### Use Copilot to extract and summarize dbCAN and Prokka results.
+
+With this experiment now we can use Copilot to gather our results together. 
+
+1. Let's summaryze and get biological meaning of the dbCAN results. Download the dbCAN table.
+
+2. Upload to Copilot and use the following prompt:
+
+### 🤖 Copilot prompt
+```Copilot
+This table contains results from the dbCAN server for a bacterial genome.
+
+Please:
+
+1. Summarize the main CAZyme families identified, including GH, GT, CE, PL, AA and CBM families when present.
+2. Identify which CAZyme families are most abundant.
+3. Explain the general biological roles associated with the main families.
+4. Based on these results, suggest what types of carbohydrates this organism may be able to degrade, modify or synthesize.
+5. Clearly distinguish between conclusions directly supported by the dbCAN results and biological hypotheses that would require further validation.
+6. Do not assign a specific substrate or enzyme function when the CAZyme family alone is not sufficient to support that conclusion.
+
+Finish with a short biological interpretation of what these CAZyme profiles might suggest about the ecological or metabolic role of the organism.
+```
 
 
