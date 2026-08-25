@@ -3,7 +3,7 @@ layout: default
 title: Practicals 1 - Computer Lab
 ---
 
-[← Home](../index.md)
+<a href="{{ site.baseurl }}/" title="Home">🏠 Home</a>
 
 # HFX307/407 Metagenomic Computer Lab
 
