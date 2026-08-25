@@ -144,6 +144,7 @@ With this experiment now we can use Copilot to gather our results together.
 2. Upload to Copilot and use the following prompt:
 
 ### 🤖 Copilot prompt
+
 ```Copilot
 This table contains results from the dbCAN server for a bacterial genome.
 
@@ -162,3 +163,37 @@ Finish with a short biological interpretation of what these CAZyme profiles migh
 
 ### Which conclusions in your interpretation are strongest, and which are the most uncertain?
 
+## Generate a common biological interpretation using both Prokka and DBCAN.
+
+Let's use Copilot to summarize both Prokka and dbCAN results.
+
+### 🤖 Copilot prompt
+
+```Copilot
+Using the attached Prokka results and the dbCAN overview table, generate 4 bar plots and a short interpretation.
+
+Please create:
+
+1. A general annotation summary plot from the Prokka results, showing the counts of major annotated feature types (for example: CDS, tRNA, rRNA, tmRNA, ncRNA, repeat regions, and hypothetical proteins if available).
+2. A putative CAZyme discovery plot based on the Prokka annotations, showing the number of genes that appear to be related to CAZyme functions. Clearly label this plot as inferred from Prokka annotations.
+3. A CAZyme discovery plot based on the dbCAN overview, showing the number of genes in each CAZy class (GH, GT, CE, PL, AA, CBM) and/or the most abundant CAZy families.
+4. A plot showing the percentage of CAZyme genes predicted to be involved in the metabolism of particular polysaccharides (for example cellulose, hemicellulose, starch, pectin, chitin, or other relevant categories).
+
+Please also:
+- Use only the information present in the attached files.
+- Do not invent annotations or metabolic roles that are not supported by the data.
+- Clearly explain any assumptions used to assign CAZyme genes to polysaccharide categories.
+- Distinguish between results directly supported by dbCAN and interpretations inferred from Prokka.
+- If any plot cannot be produced from the attached files, explain what information is missing instead of guessing.
+
+Finish with a short biological interpretation of the main results.
+```
+
+If everything work we can create a final HTML document:
+
+
+### 🤖 Copilot prompt
+
+```Copilot
+Create a HTML and markdown document with all this information as a report. Produce a link with the files I can download.
+```
