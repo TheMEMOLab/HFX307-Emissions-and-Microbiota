@@ -25,6 +25,6 @@ The course explores the connections between **ruminant nutrition, microbial ferm
 
 ## 💾 Data
 
-| Dataset | Description | Material |
+| Resource | Description | Material |
 |---|---|---|
-| Genome | Genome sequence used for the annotation practical | [🧬 Data]({{ site.baseurl }}/data/GENOME_FILENAME.fasta) |
+| Data | Datasets used during the practical exercises | [💾 Data folder](https://github.com/TheMEMOLab/HFX307-Emissions-and-Microbiota/tree/main/docs/data) |
