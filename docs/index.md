@@ -15,7 +15,7 @@ The course explores the connections between **ruminant nutrition, microbial ferm
 
 | Lecture | Topic | Material |
 |---|---|---|
-| 1 | Microbes, microbiomes & holobionts and the omics that we use to study them | [Lecture](2026-HFX307_microbiome_lecture_AVPL.pptx) |
+| 1 | Microbes, microbiomes & holobionts and the omics that we use to study them | [Lecture]({{ site.baseurl }}/slides/2026-HFX307_microbiome_lecture_AVPL.pptx) |
 
 # 🔬 Practical exercises
 
